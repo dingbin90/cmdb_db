@@ -1,0 +1,1 @@
+GateOne.init({ url: "https://172.17.1.8:443/" });

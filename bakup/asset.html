@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+
+<div style="width: 800px;margin: 0 auto" >
+    <h1>资产列表</h1>
+    <div class="btn-group" role="group" aria-label="...">
+        <button id="Checkall" type="button" class="btn btn-default">全选</button>
+        <button id="Fanxuan" type="button" class="btn btn-default">反选</button>
+        <button id="Cancelall" type="button" class="btn btn-default">取消</button>
+        <button id="idEditMode" type="button" class="btn btn-default">进入编辑模式</button>
+        <button type="button" class="btn btn-default">批量删除</button>
+        <button id="idSave" type="button" class="btn btn-default">保存</button>
+
+
+
+    </div>
+
+<table border="1px" class="table table-bordered">
+    <thead id="table_th">
+
+    </thead>
+    <tbody id="table_td">
+
+    </tbody>
+
+
+</table>
+</div>
+
+
+<script src="/static/js/jquery-1.12.4.js"></script>
+<script src="/static/js/DB_list.js"></script>
+
+<script>
+    //初始化加载
+    $(function () {
+        $.DB('/cmdb/asset-json/');
+    });
+
+
+</script>
+
+</body>
+</html>
