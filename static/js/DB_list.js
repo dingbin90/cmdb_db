@@ -1,5 +1,53 @@
 (function () {
     requestUrl = null;
+    function Next_Page() {
+            $('#pager li').each(function () {
+
+                if ($(this).hasClass('active')){
+                    //console.log($(this).text())
+                    var num = $(this).text()
+                    var num2 = Number(num) + Number(1)
+                    console.log('num2',num2)
+                    pageinit(num2)
+                }
+            })
+
+    }
+    function ChangePage() {
+            $('#pager li').each(function () {
+
+                if ($(this).hasClass('active')){
+                    //console.log($(this).text())
+                    var num = $(this).text()
+                    pageinit(num-1)
+                }
+            })
+
+    }
+    //给选中的a标签加上class=active的属性
+    function initaddclass(num) {
+         $('#pager li a ').each(function () {
+             var text = $(this).text();
+             if (text == num) {
+                // console.log('ok',text,num)
+                 $(this).parent().addClass('active')
+             }else {
+                 //console.log('no',text,num)
+             }
+
+         })
+
+    }
+    //绑定分页事件
+    function bindChangpager() {
+        $('#pager').on('click','a',function () {
+            var num = $(this).text();
+
+            pageinit(num);
+
+
+        })
+    }
      //删除绑定事件
     function binddelete() {
         $('#iddelete').click(function () {
@@ -71,7 +119,7 @@
                 success:function (arg) {
                     if(arg.status){
                         alert(arg.status)
-                        init();
+                        init(1);
 
                 }else {
                     alert(arg.error);
@@ -298,20 +346,47 @@
         })
 
     }
-
+    //点击页码初始化
+    function pageinit(page) {
+        //console.log(page)
+        $.ajax({
+            url: requestUrl,
+            type: 'GET',
+            data: {'page': page},
+            dataType: 'json',
+            success: function (result) {
+                initGlobalData(result.global_dict);
+                initHeader(result.table_config);
+                initBody(result.table_config, result.data);
+                initPager(result.pager);
+                initaddclass(page);
+            }
+        });
+    }
     //初始化table
-    function init() {
+    function init(page) {
 
       $.ajax({
           url:requestUrl,
           type:'GET',
+          data:{'page':page},
           dataType:'json',
           success:function (result) {
+              //console.log(result);
               initGlobalData(result.global_dict);
               initHeader(result.table_config);
               initBody(result.table_config,result.data);
+              initPager(result.pager);
+             // initaddclass(page);
           }
       });
+    }
+    //初始化分页的页码
+    function initPager(pager) {
+
+        $('#pager').html(pager);
+
+
     };
     //生成head
     function initHeader(table_config) {
@@ -409,7 +484,7 @@
     jQuery.extend({
         'DB':function (url) {
             requestUrl = url;
-            init();
+            init(1);
             bindMenus();
             bindCheckbox();
             bindcheckall();
@@ -417,7 +492,17 @@
             bindFanxuan();
             bindSave();
             binddelete();
+            bindChangpager();
 
+
+        },
+
+        'change':function (url) {
+             ChangePage();
+
+        },
+        'next':function (url) {
+            Next_Page();
         }
     })
 

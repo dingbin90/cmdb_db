@@ -193,28 +193,17 @@
 
 
         </table>
+
+        <nav aria-label="Page navigation">
+            <ul id="pager" class="pagination">
+
+            </ul>
+        </nav>
     </div>
 
-    <nav aria-label="Page navigation">
-  <ul id="pager" class="pagination">
-    <li>
-      <a href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li>
-      <a href="#" aria-label="Next">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -255,10 +244,20 @@
 {% endblock %}
 {% block DBjs %}
     <script>
+        function ChangPage() {
+            $.change('/cmdb/asset-json/')
+        }
+
+        function NextPage() {
+            $.next('/cmdb/asset-json/')
+        }
+
         //初始化加载
         $(function () {
             $.DB('/cmdb/asset-json/');
         });
+
+
     </script>
 {% endblock %}
 </body>

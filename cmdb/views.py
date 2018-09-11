@@ -3,6 +3,7 @@ from django.core.paginator import PageNotAnInteger,Paginator,EmptyPage
 from django.views import View
 from cmdb import models
 import json
+from cmdb.pagina.pagernation import Pagina
 # Create your views here.
 
 def index(request):
@@ -37,6 +38,17 @@ class AssetView(View):
 
 class AssetJsonView(View):
     def get(self,request,*args,**kwargs):
+        pager_num = request.GET.get('page')
+        if pager_num == "上一页":
+
+            pass
+        elif pager_num == "下一页":
+            pass
+        else:
+            pager_num = int(request.GET.get('page'))
+        print(type(pager_num))
+        #pager = json.loads(str(pager,encoding='utf-8'))
+        #print(pager)
         table_config =[
             {
                 'q': None,
@@ -102,15 +114,13 @@ class AssetJsonView(View):
             if not i['q']:
                 continue
             q_list.append(i['q'])
-        #print('----->>>',q_list)
+
         data = models.Asset.objects.all().values(*q_list)
-        #print(data)
-        paginator = Paginator(data,2)
-        page = 1
-        data = paginator.page(1)
-        print(data)
+        total_count = data.count()
+
+        Pagnation = Pagina(total_count,pager_num)
         data = list(data)
-        #print(data)
+        data = data[Pagnation.start:Pagnation.end]
         result = {
             'table_config':table_config,
             'data':data,
@@ -120,7 +130,7 @@ class AssetJsonView(View):
                 'idc_choices':list(models.IDC.objects.values_list('id','name')),
 
             },
-
+            'pager':Pagnation.page_str(),
 
         }
 
