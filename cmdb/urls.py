@@ -20,7 +20,7 @@ from cmdb import views
 urlpatterns = [
     re_path('^index/$',views.index,name='index-zy'),
     re_path('^asset/$',views.AssetView.as_view(),name='cmdb-aseet'),
-    re_path('^asset/detail/(\d+)',views.Assetdetail),
+    re_path('^asset/detail/(\d+)/$',views.Assetdetail),
     re_path('^asset-json/$',views.AssetJsonView.as_view()),
     re_path('^server-host/$',views.ServerView.as_view(),name='server-host'),
     re_path('^server-host/add/$',views.serverhost),

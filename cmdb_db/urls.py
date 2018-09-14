@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,re_path,include
-
+from rbac import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cmdb/',include("cmdb.urls")),
     path('api/',include('api.urls')),
+    re_path('login/',views.acc_login)
 
 ]

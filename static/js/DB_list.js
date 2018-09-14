@@ -348,11 +348,18 @@
     }
     //点击页码初始化
     function pageinit(page) {
+     // var  data_page = {}
+        // if (page == '«'){
+        //
+        // }else {
+        //     data_page['page'] = page
+        // }
         //console.log(page)
         $.ajax({
             url: requestUrl,
             type: 'GET',
             data: {'page': page},
+            // data:data_page,
             dataType: 'json',
             success: function (result) {
                 initGlobalData(result.global_dict);

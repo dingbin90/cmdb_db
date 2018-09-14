@@ -37,15 +37,15 @@ class Pagina(object):
     def page_str(self):
         page_list = []
         if self.current_page == 1:
-           page_pre = "<li class='disabled'><a href='javascript: void(0)'>上一页</a></li>"
+           page_pre = "<li class='disabled'><a href='javascript: void(0)'><span aria-hidden='true'>&laquo;</span></a></li>"
         else:
-            page_pre = "<li><a id='pre' href='javascript: void(0)' onclick='ChangPage()'>上一页</a></li>"
+            page_pre = "<li><a id='pre' href='javascript: void(0)' onclick='ChangPage()'><span aria-hidden='true'>&laquo;</span></a></li>"
         page_list.append(page_pre)
         for i in self.page_range():
-            a = "<li><a>%s</a></li>"%(i)
+            a = "<li><a href='javascript: void(0)'>%s</a></li>"%(i)
             page_list.append(a)
         if self.current_page == self.num_page:
-            page_next = "<li><a href='javascript: void(0)'>下一页</a></li>"
+            page_next = "<li class='disabled'><a href='javascript: void(0)'>下一页</a></li>"
         else:
             page_next = "<li><a href='javascript: void(0)' onclick='NextPage()'>下一页</a></li>"
         page_list.append(page_next)
