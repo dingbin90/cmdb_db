@@ -455,11 +455,12 @@
 
 				<!--Breadcrumb-->
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
-				<ol class="breadcrumb">
+			<!--	<ol class="breadcrumb">
 					<li><a href="#">Home</a></li>
 					<li><a href="#">Library</a></li>
 					<li class="active">Data</li>
 				</ol>
+				-->
 				<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 				<!--End breadcrumb-->
 
@@ -592,9 +593,9 @@
 
 										<!--Submenu-->
 										<ul class="collapse">
-											<li><a href="#">Link</a></li>
-											<li><a href="#">Another link</a></li>
-											<li><a href="#">Some else here</a></li>
+											<li><a href="#">用户管理</a></li>
+											<li><a href="{% url 'role' %}">角色管理</a></li>
+											<li><a href="{% url 'access-list' %}">权限管理</a></li>
 											<li class="list-divider"></li>
 											<li><a href="#">Separate link</a></li>
 

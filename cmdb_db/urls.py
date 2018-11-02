@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cmdb/',include("cmdb.urls")),
     path('api/',include('api.urls')),
-    re_path('login/',views.acc_login)
+    re_path('login/',views.acc_login),
+    re_path('rbac/',include("rbac.urls")),
 
 ]

@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'rbac.service.rbac.Validatepermisson',
+#    'rbac.service.rbac.Validatepermisson',
 ]
 
 ROOT_URLCONF = 'cmdb_db.urls'

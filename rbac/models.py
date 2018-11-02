@@ -16,6 +16,7 @@ class User(models.Model):
 
 class Role(models.Model):
     title = models.CharField(max_length=32)
+    mom = models.CharField(max_length=65,blank=True,null=True)
     permissonurl = models.ManyToManyField(to="PermisionUrl")
 
     class Meta:

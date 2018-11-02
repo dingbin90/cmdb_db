@@ -34,6 +34,7 @@ def Assetdetail(request, id):
 
 class AssetView(View):
     def get(self, request, *args, **kwargs):
+        print(111112222)
         # asset_obj = models.Asset.objects.all()
         # pageinator = Paginator(asset_obj,2)
         #
@@ -120,7 +121,7 @@ class AssetJsonView(View):
                 'title': "操作",
                 'display': True,
                 'text': {
-                    'content': "<button type='button' class='btn btn-default'><a href='/cmdb/asset/detail/{m}'>{n}</a></button>",
+                    'content': "<div class='label label-table label-info'><a href='/cmdb/asset/detail/{m}'>{n}</a></div>",
                     "kwargs": {"n": "查看详细", "m": "@id"}},
                 'attrs': {}
             },
@@ -131,13 +132,15 @@ class AssetJsonView(View):
             if not i['q']:
                 continue
             q_list.append(i['q'])
-
+        print(111111111111111111111111)
+        print('q_list',q_list)
         data = models.Asset.objects.all().values(*q_list)
         total_count = data.count()
 
         Pagnation = Pagina(total_count, pager_num)
         data = list(data)
         data = data[Pagnation.start:Pagnation.end]
+        print('>>>>>>>>>>>>>>>>>>>>',data)
         result = {
             'table_config': table_config,
             'data': data,
@@ -276,7 +279,7 @@ class ServerJsonView(View):
 
         data = models.Server.objects.all().values(*q_list)
         data = list(data)
-        # print(data)
+        print('-----',data)
 
         result = {
             'table_config': table_config,

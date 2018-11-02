@@ -1,0 +1,157 @@
+{% extends 'index.html' %}
+
+
+<body>
+{% block title %}
+{% endblock %}
+{% block page-content %}
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-control">
+                <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#"
+                   data-original-title="<h4 class='text-thin'>Information</h4><p style='width:150px'>This is an information bubble to help the user.</p>"
+                   data-html="true" title=""></a>
+            </div>
+            <h3 class="panel-title">权限管理</h3>
+        </div>
+
+        <!--Data Table-->
+        <!--===================================================-->
+        <div class="panel-body">
+            <div class="pad-btm form-inline">
+                <div class="row">
+                    <div class="col-sm-6 table-toolbar-left">
+                        <button class="btn btn-purple btn-labeled fa fa-plus" id="demo-bootbox-zoom" data-toggle="modal" data-target="#exampleModal"
+                    data-whatever="">Add</button>
+                        <button class="btn btn-default"><i class="fa fa-print"></i></button>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="fa fa-exclamation-circle"></i></button>
+                            <button class="btn btn-default"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 table-toolbar-right">
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Search"
+                                   id="demo-input-search2">
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="fa fa fa-cloud-download"></i></button>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-cog"></i>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>URL</th>
+                        <th>操作</th>
+{#                        <th>操作</th>#}
+{#                        <th class="text-center">状态</th>#}
+{#                        <th class="text-center">占位</th>#}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for list in access_obj %}
+
+                        <tr>
+                            <td><a href="#" class="btn-link" name="id"> {{ list.id}}</a></td>
+                            <td>{{ list.title }}</td>
+{#                            <td><span class="text-muted"><i class="fa fa-clock-o"></i>{{ role.mom }}</span></td>#}
+                            <td>{{ list.url }}</td>
+                            <td><a href="{% url "access-delete" list.id %}"><button  class="btn btn-default"><i class="fa fa-trash"></i></button></a></td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+            <div class="pull-right">
+                <ul class="pagination text-nowrap mar-no">
+                    <li class="page-pre disabled">
+                        <a href="#">&lt;</a>
+                    </li>
+                    <li class="page-number active">
+                        <span>1</span>
+                    </li>
+                    <li class="page-number">
+                        <a href="#">2</a>
+                    </li>
+                    <li class="page-number">
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <span>...</span>
+                    </li>
+                    <li class="page-number">
+                        <a href="#">9</a>
+                    </li>
+                    <li class="page-next">
+                        <a href="#">&gt;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--===================================================-->
+        <!--End Data Table-->
+
+
+
+
+
+
+
+    </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">权限</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="/rbac/access-list/add/">
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">名称:</label>
+                            <input type="text" name="title" class="form-control" id="recipient-name">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="control-label">URL:</label>
+                            <input type="text" name="url" class="form-control" id="recipient-name">
+                        </div>
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button type="submit" class="btn btn-primary">确定</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+</body>

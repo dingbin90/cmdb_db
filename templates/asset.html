@@ -152,37 +152,55 @@
 
 <body>
 {% block title %}
-    <div id="page-title">
-        <h1 class="page-header text-overflow">资产清单</h1>
-
-        <!--Searchbox-->
-        <div class="searchbox">
-            <div class="input-group custom-search-form">
-                <input type="text" class="form-control" placeholder="Search..">
-                <span class="input-group-btn">
-								<button class="text-muted" type="button"><i class="fa fa-search"></i></button>
-							</span>
-            </div>
-        </div>
-    </div>
 {% endblock %}
 {% block page-content %}
-    <div style="width: auto;margin: 0 auto;background-color: #f5f6f7">
+    <div class="panel">
+    <div class="panel-body">
+        <div class="pad-btm form-inline">
+           <div class="row">
+               <div class="col-sm-10 table-toolbar-left">
         <!--<h1>资产列表</h1>-->
-        <div class="btn-group" role="group" aria-label="...">
-            <button id="Checkall" type="button" class="btn btn-info">全选</button>
-            <button id="Fanxuan" type="button" class="btn btn-info">反选</button>
-            <button id="Cancelall" type="button" class="btn btn-info">取消</button>
-            <button id="idEditMode" type="button" class="btn btn-info">进入编辑模式</button>
-            <button id="iddelete" type="button" class="btn btn-info">批量删除</button>
-            <button id="idSave" type="button" class="btn btn-info">保存</button>
-            <button id="idAdd" type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal"
+{#        <div class="btn-group" role="group" aria-label="...">#}
+            <button id="Checkall" type="button" class="btn btn-purple btn-labeled fa fa-plus">全选</button>
+            <button id="Fanxuan" type="button" class="btn btn-purple btn-labeled fa fa-plus">反选</button>
+            <button id="Cancelall" type="button" class="btn btn-purple btn-labeled fa fa-plus">取消</button>
+            <button id="idEditMode" type="button" class="btn btn-purple btn-labeled fa fa-plus">进入编辑模式</button>
+            <button id="iddelete" type="button" class="btn btn-purple btn-labeled fa fa-plus">批量删除</button>
+            <button id="idSave" type="button" class="btn btn-purple btn-labeled fa fa-plus">保存</button>
+            <button id="idAdd" type="button" class="btn btn-purple btn-labeled fa fa-plus" data-toggle="modal" data-target="#exampleModal"
                     data-whatever="">添加
             </button>
 
-        </div>
+{#        </div>#}
+               </div>
 
-        <table border="1px" class="table table-bordered">
+           </div>
+            <div class="row">
+                 <div class="col-sm-6 table-toolbar-left">
+					                    <div class="form-group">
+					                        <input type="text" autocomplete="off" class="form-control" placeholder="Search" id="demo-input-search2">
+					                    </div>
+					                    <div class="btn-group">
+					                        <button class="btn btn-default"><i class="fa fa fa-cloud-download"></i></button>
+					                        <div class="btn-group">
+					                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+					                                <i class="fa fa-cog"></i>
+					                                <span class="caret"></span>
+					                            </button>
+					                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+					                                <li><a href="#">Action</a></li>
+					                                <li><a href="#">Another action</a></li>
+					                                <li><a href="#">Something else here</a></li>
+					                                <li class="divider"></li>
+					                                <li><a href="#">Separated link</a></li>
+					                            </ul>
+					                        </div>
+					                    </div>
+					                </div>
+            </div>
+        </div>
+<div class="table-responsive">
+        <table class="table table-striped">
             <thead id="table_th">
 
             </thead>
@@ -193,12 +211,13 @@
 
 
         </table>
-
+</div>
         <nav aria-label="Page navigation">
             <ul id="pager" class="pagination">
 
             </ul>
         </nav>
+    </div>
     </div>
 
 
@@ -244,6 +263,11 @@
 {% endblock %}
 {% block DBjs %}
     <script>
+
+            $(function () {
+            $.DB('/cmdb/asset-json/');
+        });
+
         function ChangPage() {
             $.change('/cmdb/asset-json/')
         }
@@ -253,9 +277,7 @@
         }
 
         //初始化加载
-        $(function () {
-            $.DB('/cmdb/asset-json/');
-        });
+
 
 
     </script>
