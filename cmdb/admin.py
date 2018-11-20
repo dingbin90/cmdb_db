@@ -3,7 +3,6 @@ from cmdb import models
 # Register your models here.
 admin.site.register(models.UserProfile)
 admin.site.register(models.UserGroup)
-
 admin.site.register(models.IDC)
 admin.site.register(models.Tag)
 admin.site.register(models.Asset)

@@ -1,0 +1,138 @@
+{% extends 'index.html' %}
+
+   {% block css_boot %}
+       <link rel="stylesheet" href="/static/ztree3/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+    {% endblock %}
+<body>
+{% block page-content %}
+
+      <form method="post">
+
+        <div class="col-lg-6 eq-box-lg">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Custom content</h3>
+                </div>
+                <div class="panel-body">
+
+                    <!--Custom Content-->
+                    <!--===================================================-->
+                    <div class="list-group">
+                        <a class="list-group-item">
+                            <label for="recipient-name" class="control-label">名称:</label>
+                                    <input type="text" name="title" class="form-control" id="recipient-name">
+                        </a>
+                        <a class="list-group-item">
+                            <label for="recipient-name" class="control-label">备注:</label>
+                                    <input type="text" name="mem" class="form-control" id="recipient-name">
+                        </a>
+                    </div>
+                    <!--===================================================-->
+                    <div>
+                        <div class="col-sm-4 ">
+                            <a href="{% url "role" %}" class="btn btn-mint btn-rounded" style="color: white">取消</a>
+                        </div>
+                        <div class="col-sm-offset-10 eq-box-sm">
+                            <button type="submit" class="btn btn-danger btn-rounded">确认</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+
+{#{% block DBjs %}#}
+{# <script type="text/javascript" src="/static/ztree3/js/jquery.ztree.core.js"></script>#}
+{# <script type="text/javascript" src="/static/ztree3/js/jquery.ztree.excheck.js"></script>#}
+{# <script type="text/javascript" src="/static/ztree3/js/jquery.ztree.exedit.js"></script>#}
+{##}
+{# <script>#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#    function inittree() {#}
+{#        var zNodes = null#}
+{#        var $this = this;#}
+{#        $.ajax({#}
+{#            url:"/rbac/role/addjson/",#}
+{#            type:'GET',#}
+{#            dataType:"json",#}
+{#            async:false,#}
+{#            success:function (data) {#}
+{##}
+{##}
+{#                $this.zNodes = data;#}
+{#            }#}
+{#        });#}
+{##}
+{#        return this.zNodes#}
+{#    }#}
+{##}
+{##}
+{##}
+{##}
+{#    zNodes = inittree();#}
+{#    var setting = {#}
+{#            view: {#}
+{#                addHoverDom: false,#}
+{#                removeHoverDom: false,#}
+{#                selectedMulti: false#}
+{#            },#}
+{#            check: {#}
+{#                enable: true#}
+{#            },#}
+{#            data: {#}
+{#                simpleData: {#}
+{#                    enable: true#}
+{#                }#}
+{#            },#}
+{#            edit: {#}
+{#                enable: true#}
+{#            }#}
+{#        };#}
+{#    $(document).ready(function(){#}
+{#            $.fn.zTree.init($("#treeDemo"), setting, zNodes);#}
+{#        });#}
+{##}
+{##}
+{#    function shouquan() {#}
+{#         var treeObj=$.fn.zTree.getZTreeObj("treeDemo");#}
+{#         var nodes = treeObj.getCheckedNodes(true)#}
+{#        alert(11)#}
+{#          var node_ids =new Array()#}
+{#        for(var i=0;i<nodes.length;i++){#}
+{##}
+{#           node_ids[i] = nodes[i].id;#}
+{#        }#}
+{#       // node_id_json = JSON.stringify(node_ids);#}
+{#        //alert(node_ids);#}
+{#        console.log(JSON.stringify(node_ids));#}
+{##}
+{#        var data_dic = {'node_id':JSON.stringify(node_ids)};#}
+{##}
+{#       // alert(data_dic)#}
+{#        $.ajax({#}
+{#            url:'/rbac/role/add',#}
+{#            type:'POST',#}
+{#            data:data_dic,#}
+{#            dataType:"json",#}
+{#           // async:false,#}
+{#            success:function (dt) {#}
+{#                alert(dt)#}
+{#            }#}
+{##}
+{#        })#}
+{#    }#}
+{##}
+{#</script>#}
+{##}
+{##}
+{#{% endblock %}#}
+
+</body>

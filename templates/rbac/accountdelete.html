@@ -1,0 +1,40 @@
+{% extends 'index.html' %}
+
+
+<body>
+{% block page-content %}
+    <form method="post">
+
+        <div class="col-lg-6 eq-box-lg">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Custom content</h3>
+                </div>
+                <div class="panel-body">
+
+                    <!--Custom Content-->
+                    <!--===================================================-->
+                    <div class="list-group">
+                        <a class="list-group-item">
+                            <h4 class="list-group-item-heading text-thin">名称</h4>
+                            <p class="list-group-item-text">{{ account_obj.name }}</p>
+                        </a>
+                    </div>
+                    <!--===================================================-->
+                    <div>
+                        <div class="col-sm-4 ">
+                            <a href="{% url "account" %}" class="btn btn-mint btn-rounded" style="color: white">取消</a>
+                        </div>
+                        <div class="col-sm-offset-10 eq-box-sm">
+                            <button type="submit" class="btn btn-danger btn-rounded">确认</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+</body>

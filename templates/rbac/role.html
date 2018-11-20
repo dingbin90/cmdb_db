@@ -1,117 +1,378 @@
 {% extends 'index.html' %}
+{% block css_boot %}
+    <link rel="stylesheet" href="/static/ztree3/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+{% endblock %}
+{% block style %}
+    <style>
+        .modal-open {
+            overflow: hidden
+        }
 
+        .modal {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1050;
+            display: none;
+            overflow: hidden;
+            -webkit-overflow-scrolling: touch;
+            outline: 0
+        }
 
+        .modal.fade .modal-dialog {
+            -webkit-transition: -webkit-transform .3s ease-out;
+            -o-transition: -o-transform .3s ease-out;
+            transition: transform .3s ease-out;
+            -webkit-transform: translate(0, -25%);
+            -ms-transform: translate(0, -25%);
+            -o-transform: translate(0, -25%);
+            transform: translate(0, -25%)
+        }
+
+        .modal.in .modal-dialog {
+            -webkit-transform: translate(0, 0);
+            -ms-transform: translate(0, 0);
+            -o-transform: translate(0, 0);
+            transform: translate(0, 0)
+        }
+
+        .modal-open .modal {
+            overflow-x: hidden;
+            overflow-y: auto
+        }
+
+        .modal-dialog {
+            position: relative;
+            width: auto;
+            margin: 10px
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #fff;
+            -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+            border: 1px solid #999;
+            border: 1px solid rgba(0, 0, 0, .2);
+            border-radius: 6px;
+            outline: 0;
+            -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
+            box-shadow: 0 3px 9px rgba(0, 0, 0, .5)
+        }
+
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1040;
+            background-color: #000
+        }
+
+        .modal-backdrop.fade {
+            filter: alpha(opacity=0);
+            opacity: 0
+        }
+
+        .modal-backdrop.in {
+            filter: alpha(opacity=50);
+            opacity: .5
+        }
+
+        .modal-header {
+            padding: 15px;
+            border-bottom: 1px solid #e5e5e5
+        }
+
+        .modal-header .close {
+            margin-top: -2px
+        }
+
+        .modal-title {
+            margin: 0;
+            line-height: 1.42857143
+        }
+
+        .modal-body {
+            position: relative;
+            padding: 15px
+        }
+
+        .modal-footer {
+            padding: 15px;
+            text-align: right;
+            border-top: 1px solid #e5e5e5;
+            background-color: white;
+        }
+
+        .modal-footer .btn + .btn {
+            margin-bottom: 0;
+            margin-left: 5px
+        }
+
+        .modal-footer .btn-group .btn + .btn {
+            margin-left: -1px
+        }
+
+        .modal-footer .btn-block + .btn-block {
+            margin-left: 0
+        }
+
+        .modal-scrollbar-measure {
+            position: absolute;
+            top: -9999px;
+            width: 50px;
+            height: 50px;
+            overflow: scroll
+        }
+
+        @media (min-width: 768px) {
+            .modal-dialog {
+                width: 600px;
+                margin: 30px auto
+            }
+
+            .modal-content {
+                -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, .5)
+            }
+
+            .modal-sm {
+                width: 300px
+            }
+        }
+
+        @media (min-width: 992px) {
+            .modal-lg {
+                width: 900px
+            }
+        }
+    </style>
+{% endblock %}
 <body>
 {% block title %}
 {% endblock %}
 {% block page-content %}
 
-<div class="panel">
-					    <div class="panel-heading">
-					        <div class="panel-control">
-					            <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#" data-original-title="<h4 class='text-thin'>Information</h4><p style='width:150px'>This is an information bubble to help the user.</p>" data-html="true" title=""></a>
-					        </div>
-					        <h3 class="panel-title">角色管理</h3>
-					    </div>
+    <div class="panel">
+        <div class="panel-heading">
+            <div class="panel-control">
+                <a class="fa fa-question-circle fa-lg fa-fw unselectable add-tooltip" href="#"
+                   data-original-title="<h4 class='text-thin'>Information</h4><p style='width:150px'>This is an information bubble to help the user.</p>"
+                   data-html="true" title=""></a>
+            </div>
+            <h3 class="panel-title">角色管理</h3>
+        </div>
 
-					    <!--Data Table-->
-					    <!--===================================================-->
-					    <div class="panel-body">
-					        <div class="pad-btm form-inline">
-					            <div class="row">
-					                <div class="col-sm-6 table-toolbar-left">
-					                    <button class="btn btn-purple btn-labeled fa fa-plus" id="demo-btn-addrow">Add</button>
-					                    <button class="btn btn-default"><i class="fa fa-print"></i></button>
-					                    <div class="btn-group">
-					                        <button class="btn btn-default"><i class="fa fa-exclamation-circle"></i></button>
-					                        <button class="btn btn-default"><i class="fa fa-trash"></i></button>
-					                    </div>
-					                </div>
-					                <div class="col-sm-6 table-toolbar-right">
-					                    <div class="form-group">
-					                        <input type="text" autocomplete="off" class="form-control" placeholder="Search" id="demo-input-search2">
-					                    </div>
-					                    <div class="btn-group">
-					                        <button class="btn btn-default"><i class="fa fa fa-cloud-download"></i></button>
-					                        <div class="btn-group">
-					                            <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-					                                <i class="fa fa-cog"></i>
-					                                <span class="caret"></span>
-					                            </button>
-					                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
-					                                <li><a href="#">Action</a></li>
-					                                <li><a href="#">Another action</a></li>
-					                                <li><a href="#">Something else here</a></li>
-					                                <li class="divider"></li>
-					                                <li><a href="#">Separated link</a></li>
-					                            </ul>
-					                        </div>
-					                    </div>
-					                </div>
-					            </div>
-					        </div>
-					        <div class="table-responsive">
-					            <table class="table table-striped">
-					                <thead>
-					                    <tr>
-					                        <th>序号</th>
-					                        <th>角色</th>
-					                        <th>描述</th>
-					                        <th>操作</th>
-					                        <th class="text-center">状态</th>
-                                            <th class="text-center">占位</th>
-					                    </tr>
-					                </thead>
-					                <tbody>
-                                    {% for role in role_obj %}
+        <!--Data Table-->
+        <!--===================================================-->
+        <div class="panel-body">
+            <div class="pad-btm form-inline">
+                <div class="row">
+                    <div class="col-sm-6 table-toolbar-left">
+                       <a href="{% url "roleadd" %}"> <button class="btn btn-purple btn-labeled fa fa-plus" id="demo-btn-addrow">Add</button></a>
+                        <button class="btn btn-default"><i class="fa fa-print"></i></button>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="fa fa-exclamation-circle"></i></button>
+                            <button class="btn btn-default"><i class="fa fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 table-toolbar-right">
+                        <div class="form-group">
+                            <input type="text" autocomplete="off" class="form-control" placeholder="Search"
+                                   id="demo-input-search2">
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-default"><i class="fa fa fa-cloud-download"></i></button>
+                            <div class="btn-group">
+                                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-cog"></i>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>序号</th>
+                        <th>角色</th>
+                        <th>描述</th>
+                        <th>授权</th>
+                        <th class="text-center">状态</th>
+                        <th class="text-center">占位</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for role in role_obj %}
 
-					                    <tr>
-					                        <td><a href="#" class="btn-link"> {{ role.id }}</a></td>
-					                        <td>{{ role.title }}</td>
-					                        <td><span class="text-muted"><i class="fa fa-clock-o"></i>{{ role.mom }}</span></td>
-					                        <td>$245.30</td>
-					                        <td class="text-center">
-					                            <div class="label label-table label-info">激活</div>
-					                        </td>
-					                        <td class="text-center"><i class="fa fa-plane"></i> CGX0089734531</td>
-					                    </tr>
-					                 {% endfor %}
-					                </tbody>
-					            </table>
-					        </div>
-					        <hr>
-					        <div class="pull-right">
-					            <ul class="pagination text-nowrap mar-no">
-					                <li class="page-pre disabled">
-					                    <a href="#">&lt;</a>
-					                </li>
-					                <li class="page-number active">
-					                    <span>1</span>
-					                </li>
-					                <li class="page-number">
-					                    <a href="#">2</a>
-					                </li>
-					                <li class="page-number">
-					                    <a href="#">3</a>
-					                </li>
-					                <li>
-					                    <span>...</span>
-					                </li>
-					                <li class="page-number">
-					                    <a href="#">9</a>
-					                </li>
-					                <li class="page-next">
-					                    <a href="#">&gt;</a>
-					                </li>
-					            </ul>
-					        </div>
-					    </div>
-					    <!--===================================================-->
-					    <!--End Data Table-->
+                        <tr>
+                            <td><a href="#" class="btn-link"> {{ role.id }}</a></td>
+                            <td>{{ role.title }}</td>
+                            <td><span class="text-muted"><i class="fa fa-clock-o"></i>{{ role.mom }}</span></td>
+                            <td>
+                                <button  class="btn btn-purple btn-icon btn-circle icon-lg fa fa-gift" data-toggle="modal" data-target="#exampleModal" onclick="getroleid(this)"></button>
+                            </td>
+                            <td class="text-center">
+                                <div class="label label-table label-info">激活</div>
+                            </td>
+                            <td class="text-center"><i class="fa fa-plane"></i> CGX0089734531</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+            <div class="pull-right">
+                <ul class="pagination text-nowrap mar-no">
+                    <li class="page-pre disabled">
+                        <a href="#">&lt;</a>
+                    </li>
+                    <li class="page-number active">
+                        <span>1</span>
+                    </li>
+                    <li class="page-number">
+                        <a href="#">2</a>
+                    </li>
+                    <li class="page-number">
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <span>...</span>
+                    </li>
+                    <li class="page-number">
+                        <a href="#">9</a>
+                    </li>
+                    <li class="page-next">
+                        <a href="#">&gt;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--===================================================-->
+        <!--End Data Table-->
 
-					</div>
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+                        <ul id="treeDemo" class="ztree"></ul>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <button id="sub" type="submit" class="btn btn-primary" onclick="shouquan(this)">确定</button>
+                        </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 
 {% endblock %}
+{% block DBjs %}
+    <script type="text/javascript" src="/static/ztree3/js/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="/static/ztree3/js/jquery.ztree.excheck.js"></script>
+    <script type="text/javascript" src="/static/ztree3/js/jquery.ztree.exedit.js"></script>
 
+    <script>
+
+
+        function inittree() {
+            var zNodes = null;
+            var $this = this;
+            $.ajax({
+                url: "/rbac/role/addjson/",
+                type: 'GET',
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    $this.zNodes = data;
+                }
+            });
+
+            return this.zNodes
+        }
+
+
+        zNodes = inittree();
+        var setting = {
+            view: {
+                addHoverDom: false,
+                removeHoverDom: false,
+                selectedMulti: false
+            },
+            check: {
+                enable: true
+            },
+            data: {
+                simpleData: {
+                    enable: true
+                }
+            },
+            edit: {
+                enable: true
+            }
+        };
+        $(document).ready(function () {
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        });
+
+        function getroleid(obj) {
+           var roleId = $(obj).parent().parent().find('a').html();
+           $('#sub').attr('role_id',roleId)
+        }
+
+        function shouquan(obj) {
+            var roleid = $(obj).attr('role_id');
+            alert(roleid)
+            var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+            var nodes = treeObj.getCheckedNodes(true);
+
+            var node_ids = new Array()
+            for (var i = 0; i < nodes.length; i++) {
+                node_ids[i] = nodes[i].id;
+            }
+            console.log(JSON.stringify(node_ids));
+            var data_dic = {'node_id': JSON.stringify(node_ids),'roleid':roleid};
+            $.ajax({
+                url: '/rbac/role/addaccess',
+                type: 'POST',
+                data: data_dic,
+                dataType: "json",
+                // async:false,
+                success: function (data) {
+                   // alert(data)
+                    location.reload()
+                }
+
+            })
+        }
+
+    </script>
+
+
+{% endblock %}
 
 </body>

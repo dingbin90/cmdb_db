@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+
+   {% block css_boot %}
+    <link href="/static/js/plugins/chosen/chosen.min.css" rel="stylesheet">
+    {% endblock %}
+<body>
+{% block page-content %}
+
+      <form method="post">
+
+        <div class="col-lg-6 eq-box-lg">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">添加用户</h3>
+                    <p>{{ msg.error }}</p>
+                </div>
+                <div class="panel-body">
+
+                    <!--Custom Content-->
+                    <!--===================================================-->
+                    <div class="list-group">
+                        <a class="list-group-item">
+                            <label for="recipient-name" class="control-label">名称:</label>
+                                    <input type="text" name="name" class="form-control" id="recipient-name">
+                        </a>
+                        <a class="list-group-item">
+                            <label for="recipient-name" class="control-label">密码:</label>
+                                    <input type="text" name="pwd" class="form-control" id="recipient-name">
+                        </a>
+                        <a class="list-group-item">
+                            <select id="demo-cs-multiselect" name="role" data-placeholder="Choose a Country..." multiple="" tabindex="-1" style="display: none;">
+                                {% for role in role_obj %}
+                                    <option value="{{ role.id }}">{{ role.title }}</option>
+                                {% endfor %}
+                            </select>
+                        </a>
+                    </div>
+                    <!--===================================================-->
+                    <div>
+                        <div class="col-sm-4 ">
+                            <a href="{% url "account" %}" class="btn btn-mint btn-rounded" style="color: white">取消</a>
+                        </div>
+                        <div class="col-sm-offset-10 eq-box-sm">
+                            <button type="submit" class="btn btn-danger btn-rounded">确认</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+
+
+{% block DBjs %}
+    <!--   多选框用到的js -->
+    <script src="/static/js/plugins/chosen/chosen.jquery.min.js"></script>
+    <script src="/static/js/demo/form-component.js"></script>
+
+{% endblock %}
+</body>

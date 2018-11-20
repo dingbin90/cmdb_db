@@ -19,6 +19,12 @@ from rbac import views
 
 urlpatterns = [
     re_path('^role/$',views.role,name='role'),
+    re_path('^role/add$',views.roleadd,name='roleadd'),
+    re_path('^role/addjson/$',views.roleaddjson),
+    re_path('^role/addaccess$',views.addaccess),
+    re_path('account/$',views.account,name='account'),
+    re_path('account/add$',views.accountadd,name='accountadd'),
+    re_path('account/delete/(\d+)$',views.accountdelete,name='account-delete'),
     re_path('^access-list/$',views.access,name='access-list'),
     re_path('^access-list/add/$',views.accessadd),
     re_path('^access-list/delete/(\d+)$',views.accdelete,name='access-delete'),

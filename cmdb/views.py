@@ -132,7 +132,7 @@ class AssetJsonView(View):
             if not i['q']:
                 continue
             q_list.append(i['q'])
-        print(111111111111111111111111)
+
         print('q_list',q_list)
         data = models.Asset.objects.all().values(*q_list)
         total_count = data.count()
